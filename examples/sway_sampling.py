@@ -3,6 +3,11 @@ using Sway Sampling (training-free inference-time schedule, F5-TTS style).
 
 Usage:
     python examples/sway_sampling.py path/to/reference.wav "合成したいテキスト"
+
+Recommended parameters (num_steps=6, t_schedule_mode="sway", sway_coeff=-1.0)
+are chosen by sweeping CER / speaker similarity over candidate settings and
+picking the best operating point. Details:
+    https://magazine.kizuna-intelligence.com/articles/article-d9ac7ce68a98
 """
 from __future__ import annotations
 
@@ -34,7 +39,7 @@ def main() -> None:
             text=text,
             ref_wav=ref_wav,
             seconds=8.0,
-            num_steps=8,
+            num_steps=6,
             t_schedule_mode="sway",
             sway_coeff=-1.0,
             seed=42,
